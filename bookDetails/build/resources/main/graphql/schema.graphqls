@@ -1,0 +1,36 @@
+type Account {
+  id: ID!
+  accountNumber: String!
+  balance: Float!
+  ownerName: String!
+}
+
+type Transaction {
+  id: ID!
+  fromAccount: String!
+  toAccount: String!
+  amount: Float!
+  timestamp: String!
+  status: String!
+}
+
+type TransactionResult {
+  transaction: Transaction!
+  fromAccount: Account!
+  toAccount: Account!
+}
+
+input TransferInput {
+  fromAccount: String!
+  toAccount: String!
+  amount: Float!
+}
+
+type Query {
+  account(accountNumber: String!): Account
+  transactions(accountNumber: String!): [Transaction]
+}
+
+type Mutation {
+  transferFunds(input: TransferInput!): TransactionResult
+}
